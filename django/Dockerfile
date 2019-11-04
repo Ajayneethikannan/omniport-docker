@@ -11,9 +11,13 @@ ARG IMAGETYPE
 RUN groupadd --system django && useradd --system --gid django django
 
 # Install dependencies
-RUN apt-get update \
-    && apt-get install -y gcc \
-    && rm -rf /var/lib/apt/lists/*
+ RUN apt-get update \
+     && apt-get install -y gcc build-essential \
+     && apt-get install -y python3-cffi libcairo2 \
+     python3-cffi libcairo2 libpango-1.0-0 \
+     libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
+     libffi-dev shared-mime-info \
+     && rm -rf /var/lib/apt/lists/*
 
 # Install pip packages
 RUN pip install --upgrade pip \
